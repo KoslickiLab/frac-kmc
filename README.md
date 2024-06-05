@@ -19,7 +19,10 @@ This command with create a sketch from the fasta/fastq file using 21-mers, a sca
 
 ## Citing
 
-Frac-KMC is not associated with any manuscript yet, but if you use Frac-KMC, make sure to cite original KMC:
+Please cite the following to credit use of frac-kmc:
+https://www.biorxiv.org/content/10.1101/2024.05.24.595805v1.abstract
+
+Additionally, you may also cite original KMC:
 
 [Marek Kokot, Maciej Długosz, Sebastian Deorowicz, KMC 3: counting and manipulating k-mer statistics, Bioinformatics, Volume 33, Issue 17, 01 September 2017, Pages 2759–2761, https://doi.org/10.1093/bioinformatics/btx304](https://academic.oup.com/bioinformatics/article/33/17/2759/3796399)
 
