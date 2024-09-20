@@ -175,6 +175,12 @@ kmc_dump: $(KMC_DUMP_OBJS) $(KMC_API_OBJS)
 	-mkdir -p $(OUT_BIN_DIR)
 	$(CC) $(CLINK) -o $(OUT_BIN_DIR)/$@ $^
 
+# frac_kmc: g++ -Wall -O3 wrappers/sketch/frac_kmc_sketch.cpp -o fracKmcSketch
+frac_kmc: wrappers/sketch/frac_kmc_sketch.cpp
+	$(CC) $(CFLAGS) -o $(OUT_BIN_DIR)/$@ $^
+
+
+
 clean:
 	-rm -f $(KMC_MAIN_DIR)/*.o
 	-rm -f $(KMC_API_DIR)/*.o
