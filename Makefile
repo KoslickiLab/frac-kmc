@@ -175,21 +175,6 @@ kmc_dump: $(KMC_DUMP_OBJS) $(KMC_API_OBJS)
 	-mkdir -p $(OUT_BIN_DIR)
 	$(CC) $(CLINK) -o $(OUT_BIN_DIR)/$@ $^
 
-kmc_tools: $(KMC_TOOLS_OBJS) $(KMC_API_OBJS) $(KFF_OBJS) $(LIB_ZLIB)
-	-mkdir -p $(OUT_BIN_DIR)
-	$(CC) $(CLINK) -I 3rd_party/cloudflare -o $(OUT_BIN_DIR)/$@ $^ $(LIB_ZLIB)
-
-$(PY_KMC_API_DIR)/%.o: $(KMC_API_DIR)/%.cpp
-	$(CC) -c -fPIC -Wall -O3 $(CPU_FLAGS) -std=c++14 $^ -o $@
-
-py_kmc_api: $(PY_KMC_API_OBJS) $(PY_KMC_API_OBJS)
-	-mkdir -p $(OUT_BIN_DIR)
-	$(CC) $(PY_KMC_API_CFLAGS) $(PY_KMC_API_DIR)/py_kmc_api.cpp $(PY_KMC_API_OBJS) \
-	-I $(KMC_API_DIR) \
-	-I $(PY_KMC_API_DIR)/libs/pybind11/include \
-	-I `python3 -c "import sysconfig;print(sysconfig.get_paths()['include'])"` \
-	-o $(OUT_BIN_DIR)/$@`python3-config --extension-suffix`
-
 clean:
 	-rm -f $(KMC_MAIN_DIR)/*.o
 	-rm -f $(KMC_API_DIR)/*.o
