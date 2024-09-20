@@ -1,4 +1,4 @@
-all: kmc kmc_dump kmc_tools py_kmc_api
+all: frackmc frackmcdump fracKmcSketch
 
 UNAME_S := $(shell uname -s)
 UNAME_M := $(shell uname -m)
@@ -167,16 +167,16 @@ $(LIB_KMC_CORE): $(KMC_CORE_OBJS) $(RADULS_OBJS) $(KMC_API_OBJS) $(KFF_OBJS)
 	-mkdir -p $(OUT_BIN_DIR)
 	ar rcs $@ $^
 
-kmc: $(KMC_CLI_OBJS) $(LIB_KMC_CORE) $(LIB_ZLIB)
+frackmc: $(KMC_CLI_OBJS) $(LIB_KMC_CORE) $(LIB_ZLIB)
 	-mkdir -p $(OUT_BIN_DIR)
 	$(CC) $(CLINK) -o $(OUT_BIN_DIR)/$@ $^ $(LIB_ZLIB)
 
-kmc_dump: $(KMC_DUMP_OBJS) $(KMC_API_OBJS)
+frackmcdump: $(KMC_DUMP_OBJS) $(KMC_API_OBJS)
 	-mkdir -p $(OUT_BIN_DIR)
 	$(CC) $(CLINK) -o $(OUT_BIN_DIR)/$@ $^
 
 # frac_kmc: g++ -Wall -O3 wrappers/sketch/frac_kmc_sketch.cpp -o fracKmcSketch
-frac_kmc: wrappers/sketch/frac_kmc_sketch.cpp
+fracKmcSketch: wrappers/sketch/frac_kmc_sketch.cpp
 	$(CC) $(CFLAGS) -o $(OUT_BIN_DIR)/$@ $^
 
 
