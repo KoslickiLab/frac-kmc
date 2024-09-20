@@ -47,7 +47,6 @@ int main(int argc, char* argv[]) {
     infilename = argv[1];
     outfilename = argv[2];
     bool use_abundance = false;
-    int num_threads = -1;
 
     for (int i = 3; i < argc; i++) {
         if (std::string(argv[i]) == "--ksize" && i + 1 < argc) {
