@@ -119,7 +119,11 @@ int main(int argc, char* argv[]) {
 
     if (result1 != 0) {
         std::cout << "kmc database build failed! Exiting..." << std::endl;
-        return -1;
+        // remove the directory random_string
+        std::string cmd5 = "rm -rf ./" + random_string;
+        std::cout << cmd5.c_str() << std::endl;
+        int result5 = std::system(cmd5.c_str());
+        return 1;
     }
 
     std::string cmd2 = "frackmcdump";
