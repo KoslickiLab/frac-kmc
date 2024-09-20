@@ -29,6 +29,7 @@ Citing
 =
 
 Please cite the following to credit use of frac-kmc:
+
 [Mahmudur Rahman Hera, David Koslicki, Cosine Similarity Estimation Using FracMinHash: Theoretical Analysis, Safety Conditions, and Implementation, In 24th International Workshop on Algorithms in Bioinformatics (WABI 2024), Schloss Dagstuhl–Leibniz-Zentrum für Informatik
 ](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.WABI.2024.6)
 
