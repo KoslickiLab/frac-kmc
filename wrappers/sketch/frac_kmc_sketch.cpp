@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
     std::string outfilename;
     bool isFasta = false;
     bool isFastq = false;
-    unsigned int num_threads = 1;
+    int num_threads = -1;
 
     if (argc < 3) {
         std::cerr << "Usage: " << argv[0] << " <infilename> <outfilename> [options]" << std::endl;
@@ -71,9 +71,9 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // if number of threads is not specified, use the default value (all available cores)
+    // if number of threads is not specified, use the default value
     if (num_threads == -1) {
-        num_threads = std::thread::hardware_concurrency();
+        num_threads = 1;
     }
 
     //std::cout << "ksize: " << ksize << std::endl;
