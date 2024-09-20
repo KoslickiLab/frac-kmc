@@ -123,6 +123,10 @@ int main(int argc, char* argv[]) {
         std::string cmd5 = "rm -rf ./" + random_string;
         std::cout << cmd5.c_str() << std::endl;
         int result5 = std::system(cmd5.c_str());
+        if (result5 != 0) {
+            std::cout << "Directory removal failed! Exiting..." << std::endl;
+            return -1;
+        }
         return 1;
     }
 
