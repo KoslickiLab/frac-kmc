@@ -1,9 +1,32 @@
+- [Frac-KMC](#frac-kmc)
+- [Installation](#installation)
+  - [Building from the source](#building-from-the-source)
+  - [Pre-built executable](#pre-built-executable)
+  - [Running by docker](#running-by-docker)
+    - [Input/output in docker](#inputoutput-in-docker)
+- [Computing the sketches](#computing-the-sketches)
+- [Citing](#citing)
+
+
 Frac-KMC
 =
 Frac-KMC is a FracMinHash sketch generator tool from FASTA/FASTQ files. This tool is a modified version of the k-mer counting tool KMC (hence the name). 
 
-Quick start
+Installation
 =
+
+## Building from the source
+After downloading the repository:
+```
+make
+```
+Make sure to add the bin directory to your PATH variable.
+
+## Pre-built executable
+For now, Frac-KMC has only been compiled for linux on an x64 machine. Easiest wat to obtain the executables is by
+1. downloading the three executables in `bin`,
+1. adding execution permission to these three executables, and
+1. adding the directory where the executables are in your `PATH` variable
 
 ## Running by docker
 frac-kmc can be run using docker.
@@ -25,26 +48,18 @@ Options:
   --n <int>          Number of threads (default: 1)
 ```
 
-You can mount a local directory during `docker run` using the `-v` flag. For example, you can ask docker to mount a local directory to `\data` using the following command. This allows you to provide the input/output arguments in your local directory as if they are in `\data` in docker.
+### Input/output in docker
+
+You can mount a local directory when invoking the `docker run` command by using the `-v` flag. 
+
+For example, you can ask docker to mount a local directory to `/data` using the following command. This allows you to provide the input/output arguments in your local directory as if they are in `/data` in the docker container.
 
 ```
 docker run -v <your_local_directory>:/data --platform linux/amd64 frackmc:x86-64 /data/<input_filename> /data/<output_filename> <options>
 ```
 
-## Building from the source
-After downloading the repository:
-```
-make
-```
-Make sure to add the bin directory to your PATH variable.
-
-## Pre-built executable
-For now, Frac-KMC has only been compiled for linux on an x64 machine. Easiest wat to obtain the executables is by
-1. downloading the three executables in `bin`,
-1. adding execution permission to these three executables, and
-1. adding the directory where the executables are in your `PATH` variable
-
-## Computing the sketches
+Computing the sketches
+=
 ```
 fracKmcSketch <fasta/fastq_filename> <sketch_name> --ksize 21 --scaled 1000 --seed 42 --n 32
 ```
