@@ -5,6 +5,32 @@ Frac-KMC is a FracMinHash sketch generator tool from FASTA/FASTQ files. This too
 Quick start
 =
 
+## Running by docker
+frac-kmc can be run using docker.
+```
+docker run --platform linux/amd64 mahmudhera/frackmc:x86-64
+```
+
+This will download the docker image of frac-kmc into your local machine. The image is about 550 MB. After downloading the image, docker will run frac-kmc, and you should see the following outout:
+
+```
+Usage: /usr/src/app/bin/fracKmcSketch <infilename> <outfilename> [options]
+Options:
+  --ksize <int>      kmer size (default: 21)
+  --scaled <int>     Scaled value (default: 1000)
+  --seed <int>       Random seed (default: 42)
+  --fa               Input file is in fasta format
+  --fq               Input file is in fastq format
+  --a                Write abundances
+  --n <int>          Number of threads (default: 1)
+```
+
+You can mount a local directory during `docker run` using the `-v` flag. For example, you can ask docker to mount a local directory to `\data` using the following command. This allows you to provide the input/output arguments in your local directory as if they are in `\data` in docker.
+
+```
+docker run -v <your_local_directory>:/data --platform linux/amd64 frackmc:x86-64 /data/<input_filename> /data/<output_filename> <options>
+```
+
 ## Building from the source
 After downloading the repository:
 ```
