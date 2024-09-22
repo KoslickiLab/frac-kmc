@@ -1,16 +1,45 @@
 - [Frac-KMC](#frac-kmc)
+- [How to use: computing the sketches](#how-to-use-computing-the-sketches)
+  - [Example](#example)
 - [Installation](#installation)
   - [Building from the source](#building-from-the-source)
   - [Pre-built executable](#pre-built-executable)
   - [Running by docker](#running-by-docker)
     - [Input/output in docker](#inputoutput-in-docker)
-- [Computing the sketches](#computing-the-sketches)
 - [Citing](#citing)
+
 
 
 Frac-KMC
 =
 Frac-KMC is a FracMinHash sketch generator tool from FASTA/FASTQ files. This tool is a modified version of the k-mer counting tool KMC (hence the name). 
+
+
+How to use: computing the sketches
+=
+
+After a proper installation, the command `fracKmcSketch` should work. The command requires the following arguments:
+
+| Argument | Mandatory? | Meaning |
+| --- | --- | --- |
+| `<infilename>` | Yes | The input file name (should be fasta or fastq) |
+| `<outfilename>` | Yes | The output file name |
+| `--ksize <int>` | No | kmer size (default: 21) |
+| `--scaled <int>` | No | Scaled value (default: 1000) |
+| `--seed <int>` | No | Random seed (default: 42) |
+| `--fa` or `--fq` | Yes | Input file format (fasta or fastq) |
+| `--n <int>` | No | Number of threads (default: 1) |
+
+As of September 2024, `frac-kmc` supports fasta or fastq files, both in gzipped or unzipped format.
+
+## Example
+```
+fracKmcSketch <fasta> <sketch_name> --ksize 21 --scaled 1000 --seed 42 --n 32 --fa
+```
+This command with create a sketch from the fasta file using 21-mers, a scaled value of 1000, and use 42 as the seed for the hash function. It will also use 32 parallel threads to compute the sketch. The resulting sketch should be compatible with a sketch computed using `sourmash sketch dna input_filename -p k=21,scaled=1000 -o sketch_name`. 
+
+Note that `fracKmcSketch` requires an explicit argument `--fa`, which means the input file is in fasta format. If the input file is a fastq file, the argument `--fq` should be provided.
+
 
 Installation
 =
@@ -57,13 +86,6 @@ For example, you can ask docker to mount a local directory to `/data` using the 
 ```
 docker run -v <your_local_directory>:/data --platform linux/amd64 frackmc:x86-64 /data/<input_filename> /data/<output_filename> <options>
 ```
-
-Computing the sketches
-=
-```
-fracKmcSketch <fasta/fastq_filename> <sketch_name> --ksize 21 --scaled 1000 --seed 42 --n 32
-```
-This command with create a sketch from the fasta/fastq file using 21-mers, a scaled value of 1000, and use 42 as the seed for the hash function. It will also use 32 parallel threads to compute the sketch. The resulting sketch should be compatible with a sketch computed using `sourmash sketch dna input_filename -p k=21,scaled=1000 -o sketch_name`.
 
 
 Citing

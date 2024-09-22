@@ -27,3 +27,4 @@ CMD []
 
 
 # docker run -v /Users/mbr5797/PSU/Research/frac-kmc-koslickilab/frac-kmc/test_frac_kmc:/data --platform linux/amd64 frackmc:x86-64 /data/ndl.fasta /data/test_output --fa
+
