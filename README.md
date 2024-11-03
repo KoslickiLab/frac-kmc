@@ -29,6 +29,7 @@ After a proper installation, the command `fracKmcSketch` should work. The comman
 | `--seed <int>` | No | Random seed (default: 42) |
 | `--fa` or `--fq` | Yes | Input file format (fasta or fastq) |
 | `--n <int>` | No | Number of threads (default: 1) |
+| `--a` | No | Write abundance (default: false) |
 
 As of September 2024, `frac-kmc` supports fasta or fastq files, both in gzipped or unzipped format.
 
