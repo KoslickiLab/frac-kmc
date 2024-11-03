@@ -192,7 +192,7 @@ frackmc: $(KMC_CLI_OBJS) $(LIB_KMC_CORE) $(LIB_ZLIB)
 
 frackmcdump: $(KMC_DUMP_OBJS) $(KMC_API_OBJS)
 	-mkdir -p $(OUT_BIN_DIR)
-	$(CC) $(CLINK) -o $(OUT_BIN_DIR)/$@ $^
+	$(CC) $(CLINK) -o $(OUT_BIN_DIR)/$@ $^ -lssl -lcrypto
 
 # frac_kmc: g++ -Wall -O3 wrappers/sketch/frac_kmc_sketch.cpp -o fracKmcSketch
 fracKmcSketch: wrappers/sketch/frac_kmc_sketch.cpp
