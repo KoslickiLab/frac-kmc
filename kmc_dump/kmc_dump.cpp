@@ -23,6 +23,8 @@
 #include "nc_utils.h"
 #include <map>
 #include <openssl/md5.h>
+#include <sstream>
+#include <iomanip>
 
 using namespace std;
 
