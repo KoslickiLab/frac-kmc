@@ -84,7 +84,7 @@ endif
 OPENSSL_DIR := $(dir $(OPENSSL_PATH))
 
 # Set flags using the directory path
-CFLAGS += -I$(OPENSSL_DIR)/../include
+CFLAGS += -I$(OPENSSL_DIR)/../include -lssl -lcrypto
 LDFLAGS += -L$(OPENSSL_DIR)/../lib -lssl -lcrypto
 
 # export LD_LIBRARY_PATH appropriately
