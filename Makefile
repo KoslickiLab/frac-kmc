@@ -71,6 +71,25 @@ CFLAGS	= -Wall -O3 -fsigned-char $(CPU_FLAGS) $(STATIC_CFLAGS) -std=c++14
 CLINK	= -lm $(STATIC_LFLAGS) -O3 -std=c++14
 PY_KMC_API_CFLAGS = $(PY_FLAGS) -Wall -shared -std=c++14 -O3
 
+
+# Find OpenSSL path using "which"
+OPENSSL_PATH := $(shell which openssl)
+
+# if open ssl is not found, then exit
+ifeq ($(OPENSSL_PATH),)
+$(error "OpenSSL not found. Please install OpenSSL")
+endif
+
+# Extract directory path from the full path
+OPENSSL_DIR := $(dir $(OPENSSL_PATH))
+
+# Set flags using the directory path
+CFLAGS += -I$(OPENSSL_DIR)/../include
+LDFLAGS += -L$(OPENSSL_DIR)/../lib -lssl -lcrypto
+
+# export LD_LIBRARY_PATH appropriately
+export LD_LIBRARY_PATH := $(OPENSSL_DIR)/../lib:$(LD_LIBRARY_PATH)
+
 KMC_CLI_OBJS = \
 $(KMC_CLI_DIR)/kmc.o
 

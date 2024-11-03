@@ -22,6 +22,7 @@
 #include "../kmc_api/kmc_file.h"
 #include "nc_utils.h"
 #include <map>
+#include <openssl/md5.h>
 
 using namespace std;
 
@@ -357,7 +358,30 @@ int main(int argc, char* argv[])
 
 		}
 
-		output_string = "], \"molecule\":\"dna\", \"md5sum\":\"abcd\"}], \"version\":0.1}]\n";
+
+        // compute md5sum
+        MD5_CTX md5_ctx;
+        MD5_Init(&md5_ctx);
+        // add ksize to md5sum
+        string ksize_str = to_string(ksize);
+        MD5_Update(&md5_ctx, ksize_str.c_str(), ksize_str.length());
+        // add the hashes to md5sum
+        for (int i=0; i<hashes.size(); i++)
+        {
+            string hash_str = to_string(hashes[i]);
+            MD5_Update(&md5_ctx, hash_str.c_str(), hash_str.length());
+        }
+        unsigned char md5sum[MD5_DIGEST_LENGTH];
+        MD5_Final(md5sum, &md5_ctx);
+        string md5sum_str = "";
+        std::ostringstream oss;
+        for(int i = 0; i < MD5_DIGEST_LENGTH; i++)
+        {
+            oss << std::hex << std::setw(2) << std::setfill('0') << (int)md5sum[i];
+        }
+        md5sum_str = oss.str();
+
+		output_string = "], \"molecule\":\"dna\", \"md5sum\":\"" + md5sum_str + "\"}], \"version\":0.1}]\n";
 		strcpy(str, output_string.c_str());
 		fwrite(str, 1, output_string.length(), out_file);
 
