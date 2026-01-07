@@ -52,12 +52,6 @@ make
 ```
 Make sure to add the bin directory to your PATH variable.
 
-## Pre-built executable
-For now, Frac-KMC has only been compiled for linux on an x64 machine. Easiest wat to obtain the executables is by
-1. downloading the three executables in `bin`,
-1. adding execution permission to these three executables, and
-1. adding the directory where the executables are in your `PATH` variable
-
 ## Running by docker
 frac-kmc can be run using docker.
 ```
